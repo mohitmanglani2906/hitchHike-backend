@@ -18,13 +18,14 @@ class UserRequests(APIView):
         # userEmail = request.GET.get("userEmail")
         requestData = getRequestsDataBasedOnCondition()
         fullName = ""
+        if not requestData:
+            return Response({"success":False, "requestData":"No data found"})
         for request in requestData:
             if "email" in request and request["email"]:
                 print("Email__ %s", request["email"])
                 fullName = getUserNames(request["email"])
                 request["fullName"] = fullName
-        if not requestData:
-            return Response({"success":False, "requestData":"No data found"})
+
         return Response({"success": True, "requestData": requestData})
 
     def post(self,request):
