@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import userLoginDataSerializers
-from .utils import checkUserExitsOrNot
+from .utils import checkUserExitsOrNot, sendMail
 
 # Create your views here.
 
@@ -58,6 +58,10 @@ class UserLogin(APIView):
                 if serializerUserLogIn.is_valid():
                     serializerUserLogIn.save()
                     print("__serializerUserLogin__ %s", serializerUserLogIn.data)
+                    try:
+                        sendMail(serializerUserLogIn.data["email"])
+                    except Exception as e:
+                        print(e.message)
                     success = True
                     return Response({"success": success, "requestData": serializerUserLogIn.data})
                 # else:
