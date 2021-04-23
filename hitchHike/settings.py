@@ -135,6 +135,7 @@ MONGO_HOST = 'localhost'
 MONGO_NAME = 'hitchhikedb'
 #MONGO_DATABASE_HOST = 'mongodb://%s:%s@%s/%s' % (MONGO_USER, MONGO_PASS, MONGO_HOST, MONGO_NAME)
 MONGO_DATABASE_HOST = 'mongodb://127.0.0.1:27017'
+
 mongoengine.connect(MONGO_NAME, host=MONGO_DATABASE_HOST)
 
 
